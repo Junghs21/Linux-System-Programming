@@ -1,0 +1,45 @@
+CMake is a cross-platform build system tool used for managing the build process of C/C++ projects. It generates platform-specific build files, such as Makefiles, Visual Studio project files, or Xcode project files, based on configuration files. This allows you to easily compile your project across multiple operating systems and environments.
+
+Key concepts and features when using CMake
+
+1. CMakeLists.txt
+  - The core file in CMake is the CMakeLists.txt. This file contains all the instructions for configuring your project, such as defining source files, setting compiler options and specifying how to build the targets(executables or libraries).
+  - Every directory in a project that requires building typically contains a CMakeLists.txt file.
+
+2. Cross-platform Support
+  - CMake allows you to build your project on different operating systems, such as Windows, macOS, and Linux, without having to change much in your build configuration.
+  - It can generate build files for various systems like Makefiles for Linux, Visual Studio solution files for Windows, or Xcode project files for macOS.
+
+3. Build Process
+  - CMake reads the CMakeLists.txt file to configure the build.
+  - It then generates the appropriate build files for the platform.
+  - Afterward, you can use the platform's build tools(e.g., make on Linux, Visual Studio on Windows) to compile the project and produce executables or libraries.
+
+4. Basic CMake Commands
+  - project()
+	: Defines the name of the project.
+  - add_executable()
+	: Defines an executable target for your project.
+  - add_library()
+	: Defines a library target.
+  - target_link_libraries()
+	: Links a target(executable or library) to other libraries.
+  - set()
+	: Sets variables.
+
+5. Advantages of CMake
+  - Cross-platform compatibility
+	: It supports multiple operating systems and compilers, so you can use the same configuration file on various platforms.
+  - Modular
+	: CMake is well-suited for large projects with multiple modules or libraries. It allows you to easily manage and build each part of the project.
+  - External library support
+	: CMake makes it easy to find and link external libraries using commands like 'find_package()'
+
+6. How CMake Words
+  The main idea is that CMake abstracts away platform-specific build commands and allows you to focus on the projects logic. It creates the platform-specific build scripts so that you don't have to write separate build configurations for each platform you want to support.
+
+7. How to Use CMake
+  1) Install CMake
+  2) Set Up a CMake Project
+  3) Run CMake
+  4) Build the Project
