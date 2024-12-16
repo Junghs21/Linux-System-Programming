@@ -1,0 +1,19 @@
+Comparison between Method 1(Mutex + Condition Variable) and Method 2(Semaphore)
+
+1. Synchronization Mechanism
+	- Mutex and Condition Variable
+	Fine-grained control over shared resources and allows waiting and signaling explicitly.
+	- Semaphore
+	Simpler mechanism, but harder to implement complex synchronization logic
+
+2. Use Case
+	- Mutex and Condition Variable
+	Suitable for scenarios where multiple threads require conditional waiting
+	- Semaphore
+	Works well for signaling or resource counting
+
+3. Complexity
+	- Mutex and Condition Variable
+	Slightly more complex due to additional condition variable
+	- Semaphore
+	Easier to understand and implement in basic scenarios
