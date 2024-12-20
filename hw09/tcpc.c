@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include "tcp.h"
+
+
+main(int argc, char *argv[])
+{
+	int					sockfd, n;
+	struct sockaddr_in	servAddr;
+	MsgType				msg;
+
+	//Create a TCP socket
+	if ((sockfd = socket(PF_INET, SOCK_STREAM, 0)) < 0)  {
+		perror("socket");
+		exit(1);
+	}
+
+	//Initialize server address structure
+	bzero((char *)&servAddr, sizeof(servAddr));
+	servAddr.sin_family = PF_INET;
+	servAddr.sin_addr.s_addr = inet_addr(SERV_HOST_ADDR);	//Server address
+	servAddr.sin_port = htons(SERV_TCP_PORT);		//Server port
+
+	//Connect to the server
+	if (connect(sockfd, (struct sockaddr *) &servAddr, sizeof(servAddr)) < 0)  {
+		perror("connect");
+		exit(1);
+	}
+
+	//Prepare and send a request message
+	msg.type = MSG_REQUEST;
+	sprintf(msg.data, "This is a request from %d.", getpid());
+	if (write(sockfd, (char *)&msg, sizeof(msg)) < 0)  {
+		perror("write");
+		exit(1);
+	}
+	printf("Sent a request.....");
+
+	//Read the reply from the server
+	if ((n = read(sockfd, (char *)&msg, sizeof(msg))) < 0)  {
+		perror("read");
+		exit(1);
+	}
+	printf("Received reply: %s\n", msg.data);
+
+	//Close the socket
+	close(sockfd);
+}
